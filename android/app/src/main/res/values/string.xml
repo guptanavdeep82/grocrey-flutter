@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SAB Grocery</string>
+    <string name="facebook_app_id">1216934565526698</string>
+    <string name="fb_login_protocol_scheme">fb1216934565526698</string>
+    <string name="facebook_client_token">88ff43d199f0ec80f65229a849b47016</string>
+</resources>

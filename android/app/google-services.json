@@ -1,0 +1,115 @@
+{
+  "project_info": {
+    "project_number": "999232748999",
+    "firebase_url": "https://sabgrocerynew-default-rtdb.firebaseio.com",
+    "project_id": "sabgrocerynew",
+    "storage_bucket": "sabgrocerynew.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:999232748999:android:b153c9c2c44e35701b2de2",
+        "android_client_info": {
+          "package_name": "com.sabgrocery.delivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "999232748999-ala86hcvkvpjn8t3epeirdhkmqk79rn1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sabgrocery.delivery",
+            "certificate_hash": "12067f3a5fb3315a69bffdab765f69338b824879"
+          }
+        },
+        {
+          "client_id": "999232748999-e982kms8eimd2rn8m2ol99eo0vf2nmgf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sabgrocery.delivery",
+            "certificate_hash": "17999786392a59830cc28c77d2ac2386766fb922"
+          }
+        },
+        {
+          "client_id": "999232748999-9i487pfga5srcm7or38ogkhuoqfc0he0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADTZmf3orJC8sFmURQIuVhLxGPRxYygtU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "999232748999-9i487pfga5srcm7or38ogkhuoqfc0he0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "999232748999-uva6t8to1tad3hfht336kjfqf8huf9t0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sabgrocery.user"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:999232748999:android:bf9aa6e89712125e1b2de2",
+        "android_client_info": {
+          "package_name": "com.sabgrocery.user"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "999232748999-6dekhoae09k00e7lei64qrk5ec06gpch.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sabgrocery.user",
+            "certificate_hash": "8194e2af780783eea9eb1584528f3d079faf658e"
+          }
+        },
+        {
+          "client_id": "999232748999-khlp9q9cqqm173mqsk57ngt163cn0jhr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sabgrocery.user",
+            "certificate_hash": "9394151e0e19528a002babdbc6e5b5a9ba33fe1f"
+          }
+        },
+        {
+          "client_id": "999232748999-9i487pfga5srcm7or38ogkhuoqfc0he0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADTZmf3orJC8sFmURQIuVhLxGPRxYygtU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "999232748999-9i487pfga5srcm7or38ogkhuoqfc0he0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "999232748999-uva6t8to1tad3hfht336kjfqf8huf9t0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sabgrocery.user"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
