@@ -9,8 +9,10 @@
 **/.vagrant/
 **/DerivedData/
 Icon?
+# CocoaPods
 **/Pods/
 **/.symlinks/
+Podfile.lock
 profile
 xcuserdata
 **/.generated/
