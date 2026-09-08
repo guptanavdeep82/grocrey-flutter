@@ -36,7 +36,6 @@
 firebase.json
 get_changed_files.sh
 ios/build
-pubspec.lock
 
 # Web related
 
