@@ -57,14 +57,37 @@ final RouteObserver<ModalRoute<void>> routeObserver = RouteObserver<ModalRoute<v
 late AndroidNotificationChannel channel;
 
 Future<void> main() async {
-  setPathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
+  FlutterError.onError = (details) {
+    FlutterError.presentError(details);
+    if (kDebugMode) {
+      print(details.exceptionAsString());
+    }
+  };
+  PlatformDispatcher.instance.onError = (error, stack) {
+    if (kDebugMode) {
+      print('$error\n$stack');
+    }
+    return true;
+  };
+
+  try {
+    await _bootstrap();
+  } catch (e, stack) {
+    runApp(_LaunchErrorApp(error: e, stack: stack));
+  }
+}
+
+Future<void> _bootstrap() async {
+  setPathUrlStrategy();
 
   // ✅ Replace your current try/catch with this
   try {
     await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   } on FirebaseException catch (e) {
-    if (e.code != 'duplicate-app') rethrow; // Only ignore duplicate, rethrow real errors
+    if (e.code != 'duplicate-app') {
+      if (kDebugMode) print('Firebase init error: $e');
+    }
   } catch (e) {
     if (kDebugMode) print('Firebase init error: $e');
   }
@@ -279,4 +302,26 @@ class _MyAppState extends State<MyApp> {
 class Get {
   static BuildContext? get context => navigatorKey.currentContext;
   static NavigatorState? get navigator => navigatorKey.currentState;
+}
+
+class _LaunchErrorApp extends StatelessWidget {
+  final Object error;
+  final StackTrace stack;
+  const _LaunchErrorApp({required this.error, required this.stack});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: SingleChildScrollView(
+              child: Text('$error\n\n$stack', style: const TextStyle(fontSize: 12)),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }

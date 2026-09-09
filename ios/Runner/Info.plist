@@ -39,6 +39,19 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>FLTEnableImpeller</key>
+	<false/>
+	<key>GMSApiKey</key>
+	<string>AIzaSyC3QDm6HdG0RR5lgXMFaWCPUsUCjnH4YTg</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
+	<key>io.flutter.embedded_views_preview</key>
+	<true/>
 	<!-- <key>FacebookAppID</key>
 	<string>1216934565526698</string>
 	<key>FacebookClientToken</key>
@@ -64,6 +77,10 @@
 	<string>SAB Grocery uses your location to show nearby stores and provide accurate order delivery updates, even when the app is not actively in use.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app need media access for taking photo for user profile picture.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>This app needs photo library access to save and choose profile pictures.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>SAB Grocery uses your location to show nearby stores and delivery updates.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

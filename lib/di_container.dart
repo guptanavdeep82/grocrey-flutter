@@ -52,7 +52,8 @@ import 'data/datasource/remote/dio/logging_interceptor.dart';
 import 'common/reposotories/news_letter_repo.dart';
 
 final sl = GetIt.instance;
-final database = AppDatabase();
+AppDatabase? _database;
+AppDatabase get database => _database ??= AppDatabase();
 
 
 Future<void> init() async {
