@@ -3,23 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>384321080318-hndoiukdgp5sc3e2q1j3s6lmlqtjrqgi.apps.googleusercontent.com</string>
+	<string>999232748999-rkt1s89hd3c105vhj2ugqhc7ar787tg2.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.384321080318-hndoiukdgp5sc3e2q1j3s6lmlqtjrqgi</string>
+	<string>com.googleusercontent.apps.999232748999-rkt1s89hd3c105vhj2ugqhc7ar787tg2</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>384321080318-09lm13guijk2tu9t0e3l7sjkgpj6d18u.apps.googleusercontent.com</string>
+	<string>999232748999-6dekhoae09k00e7lei64qrk5ec06gpch.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyC7ZjHtAqwIhwo0h1IeFlRAnaJsMA9Jy6s</string>
+	<string>AIzaSyCkCWtusQHprGNbj5GAiQR95E3_UHyaNEo</string>
 	<key>GCM_SENDER_ID</key>
-	<string>384321080318</string>
+	<string>999232748999</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.sabgrocery.user</string>
+	<string>com.sabgrocery.userapp</string>
 	<key>PROJECT_ID</key>
-	<string>gem-b5006</string>
+	<string>sabgrocerynew</string>
 	<key>STORAGE_BUCKET</key>
-	<string>gem-b5006.firebasestorage.app</string>
+	<string>sabgrocerynew.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +31,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:384321080318:ios:19a6fcda2628fb362c0eaf</string>
+	<string>1:999232748999:ios:51a9cff8e29224ea1b2de2</string>
+	<key>DATABASE_URL</key>
+	<string>https://sabgrocerynew-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>
