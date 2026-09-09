@@ -2,7 +2,7 @@ name: flutter_grocery
 description: A new Flutter application.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.3+2026090906 # 1.0.3+2026090906  2026 09 09 where 06 is the build number of the day
+version: 1.0.3+2026090907 # 1.0.3+2026090907  2026 09 09 where 07 is the build number of the day
 
 environment:
   sdk: ^3.8.1

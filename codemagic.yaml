@@ -1,0 +1,45 @@
+workflows:
+  ios-testflight-release:
+    name: iOS TestFlight Release
+    instance_type: mac_mini_m2
+    max_build_duration: 120
+    integrations:
+      app_store_connect: Codemagic
+    environment:
+      flutter: 3.44.4
+      xcode: latest
+      cocoapods: default
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.sabgrocery.userapp
+      vars:
+        APP_STORE_APPLE_ID: 6759653079
+    scripts:
+      - name: Get Flutter packages
+        script: flutter pub get
+      - name: Drop stale Podfile.lock
+        script: rm -f ios/Podfile.lock
+      - name: Set up code signing
+        script: xcode-project use-profiles
+      - name: Install pods
+        script: |
+          find . -name "Podfile" -execdir pod install --repo-update \;
+      - name: Flutter build ipa (release only)
+        script: |
+          LATEST="$(app-store-connect get-latest-testflight-build-number "$APP_STORE_APPLE_ID" || true)"
+          if [ -n "$LATEST" ] && [ "$LATEST" -eq "$LATEST" ] 2>/dev/null; then
+            BUILD_NUMBER="$((LATEST + 1))"
+          else
+            BUILD_NUMBER="2026090907"
+          fi
+          flutter build ipa --release \
+            --build-number="$BUILD_NUMBER" \
+            --export-options-plist=/Users/builder/export_options.plist
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
+        submit_to_app_store: false
