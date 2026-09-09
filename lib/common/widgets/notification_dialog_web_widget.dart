@@ -1,9 +1,9 @@
 
 
 
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:universal_html/html.dart' as html;
 import 'package:flutter_grocery/common/widgets/custom_image_widget.dart';
 import 'package:flutter_grocery/features/chat/screens/chat_screen.dart';
 import 'package:flutter_grocery/features/order/providers/order_provider.dart';
@@ -41,9 +41,16 @@ class _NewRequestDialogState extends State<NotificationDialogWebWidget> {
     _startAlarm();
   }
 
-  void _startAlarm() async {
-    AudioPlayer audio = AudioPlayer();
-    audio.play(AssetSource('notification.wav'));
+  void _startAlarm() {
+    if (!kIsWeb) {
+      return;
+    }
+    try {
+      html.AudioElement()
+        ..src = 'assets/notification.wav'
+        ..autoplay = true
+        ..play();
+    } catch (_) {}
   }
 
   @override
