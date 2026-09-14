@@ -30,7 +30,10 @@ workflows:
           if [ -n "$LATEST" ] && [ "$LATEST" -eq "$LATEST" ] 2>/dev/null; then
             BUILD_NUMBER="$((LATEST + 1))"
           else
-            BUILD_NUMBER="2026090907"
+            BUILD_NUMBER="2026091401"
+          fi
+          if [ "$BUILD_NUMBER" -le 2026090907 ]; then
+            BUILD_NUMBER="2026091401"
           fi
           flutter build ipa --release \
             --build-number="$BUILD_NUMBER" \
