@@ -794,6 +794,9 @@ class OrderProvider extends ChangeNotifier {
   }
 
   void _handleRazorpayFailure(String message) {
+    _isLoading = false;
+    notifyListeners();
+    stopLoader();
     _razorpayCallback?.call(false, message, '-1');
     _pendingPlaceOrderBody = null;
   }
@@ -845,6 +848,8 @@ class OrderProvider extends ChangeNotifier {
             orderId: rzpOrderId,
             paymentRequestId: _paymentRequestId,
           );
+          _isLoading = false;
+          notifyListeners();
         } else {
           _isLoading = false;
           notifyListeners();

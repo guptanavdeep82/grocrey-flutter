@@ -13,9 +13,36 @@ enum SnackBarStatus {error, success, alert, info}
 
 enum SnackBarWebPosition {topLeft, topRight, bottomLeft, bottomRight, center}
 
+bool _shouldHideFromUser(String? message, {bool hideEmpty = true}) {
+  final text = (message ?? '').toLowerCase();
+  if (text.trim().isEmpty) {
+    return hideEmpty;
+  }
+  return text.contains('internal server')
+      || text.contains('sqlstate')
+      || text.contains('operation not permitted')
+      || text.contains('oauth_access_tokens')
+      || text.contains('server-busy')
+      || text.contains('server is busy')
+      || text.contains('server_busy_try_again')
+      || text.contains('connection refused')
+      || text.contains('connection: mysql')
+      || text.contains('queryexception')
+      || text.contains('payment cancelled')
+      || text.contains('payment_cancelled')
+      || text.contains('payment canceled')
+      || text.contains('failed to load data - status code: 5')
+      || text.contains('<html')
+      || text.contains('<!doctype')
+      || text.contains('whoops')
+      || text.contains('illuminate\\');
+}
 
 void showCustomSnackBarHelper(String? message, {
   bool isError = true, bool isToast = false, SnackBarStatus? snackBarStatus, SnackBarWebPosition? snackBarWebPosition = SnackBarWebPosition.topRight}){
+  if (_shouldHideFromUser(message)) {
+    return;
+  }
 
   final Size size = MediaQuery.of(Get.context!).size;
 
@@ -117,6 +144,9 @@ EdgeInsets? snackBarMargin(SnackBarWebPosition? snackBarWebPosition, Size size) 
 
 
 void showFlutterDefaultToaster({required String message, bool isError = true, Color? backgroundColor}){
+  if (_shouldHideFromUser(message)) {
+    return;
+  }
   Fluttertoast.showToast(
     msg: message,
     toastLength: Toast.LENGTH_LONG,
@@ -133,6 +163,9 @@ void showFlutterCustomToaster(String? message, {ToasterMessageType type = Toaste
   String? icon, String? toasterTitle,
   required BuildContext context,
 }) {
+  if (_shouldHideFromUser(message) || (toasterTitle != null && _shouldHideFromUser(toasterTitle, hideEmpty: false))) {
+    return;
+  }
   FToast fToast = FToast();
   fToast.init(context);
   Widget toast = Container(

@@ -236,6 +236,10 @@ class MyInAppBrowser extends InAppBrowser {
     if(isSuccess) {
       Navigator.pushReplacementNamed(context, '${RouteHelper.orderSuccessful}/$orderID/success');
     }else {
+      final text = message.toLowerCase();
+      if (text.contains('cancel') || text.contains('internal server') || text.contains('sqlstate')) {
+        return;
+      }
       showCustomSnackBarHelper(message);
     }
   }

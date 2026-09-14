@@ -182,24 +182,28 @@ class AuthRepo {
 
   Future<ApiResponseModel> updateToken() async {
     try {
-      String? deviceToken = '@';
+      String? deviceToken;
 
       if (defaultTargetPlatform == TargetPlatform.iOS) {
-        FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(alert: true, badge: true, sound: true);
+        await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(alert: true, badge: true, sound: true);
         NotificationSettings settings = await FirebaseMessaging.instance.requestPermission(
           alert: true, announcement: false, badge: true, carPlay: false,
           criticalAlert: false, provisional: false, sound: true,
         );
-        if(settings.authorizationStatus == AuthorizationStatus.authorized) {
-          deviceToken = (await getDeviceToken())!;
+        if (settings.authorizationStatus == AuthorizationStatus.authorized
+            || settings.authorizationStatus == AuthorizationStatus.provisional) {
+          deviceToken = await getDeviceToken();
         }
-      }else {
+      } else {
+        deviceToken = await getDeviceToken();
+      }
 
-        deviceToken = (await getDeviceToken())!;
+      if (deviceToken == null || deviceToken.isEmpty || deviceToken == '@') {
+        return ApiResponseModel.withSuccess(null);
       }
 
       if(!kIsWeb){
-        FirebaseMessaging.instance.subscribeToTopic(AppConstants.topic);
+        await FirebaseMessaging.instance.subscribeToTopic(AppConstants.topic);
       }
 
       Response response = await dioClient!.post(
@@ -214,22 +218,36 @@ class AuthRepo {
   }
 
   Future<String?> getDeviceToken() async {
-    String? deviceToken = '@';
-    try{
-      deviceToken = (await FirebaseMessaging.instance.getToken())!;
-
-    }catch(error){
-      if (kDebugMode) {
-        print('error is: $error');
+    try {
+      if (!kIsWeb && defaultTargetPlatform == TargetPlatform.iOS) {
+        String? apnsToken = await FirebaseMessaging.instance.getAPNSToken();
+        if (apnsToken == null) {
+          await Future.delayed(const Duration(seconds: 2));
+          apnsToken = await FirebaseMessaging.instance.getAPNSToken();
+        }
+        if (apnsToken == null) {
+          await Future.delayed(const Duration(seconds: 3));
+          apnsToken = await FirebaseMessaging.instance.getAPNSToken();
+        }
+        if (apnsToken == null) {
+          if (kDebugMode) {
+            print('APNs token not available yet');
+          }
+          return null;
+        }
       }
-    }
-    if (deviceToken != null) {
+
+      final String? deviceToken = await FirebaseMessaging.instance.getToken();
       if (kDebugMode) {
         print('--------Device Token---------- $deviceToken');
       }
+      return deviceToken;
+    } catch (error) {
+      if (kDebugMode) {
+        print('error is: $error');
+      }
+      return null;
     }
-
-    return deviceToken;
   }
 
   String getUserToken() {

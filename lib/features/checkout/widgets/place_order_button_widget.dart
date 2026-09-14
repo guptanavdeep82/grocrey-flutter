@@ -288,9 +288,9 @@ class _PlaceOrderButtonWidgetState extends State<PlaceOrderButtonWidget> {
   }
 
   void _callback(bool isSuccess, String message, String orderID) async {
+    Provider.of<OrderProvider>(Get.context!, listen: false).stopLoader();
     if (isSuccess) {
       Provider.of<CartProvider>(Get.context!, listen: false).clearCartList();
-      Provider.of<OrderProvider>(Get.context!, listen: false).stopLoader();
       if (Provider.of<OrderProvider>(Get.context!, listen: false).paymentMethod?.getWay != 'cash_on_delivery') {
         Navigator.pushReplacementNamed(
           Get.context!,
@@ -301,7 +301,7 @@ class _PlaceOrderButtonWidgetState extends State<PlaceOrderButtonWidget> {
         Navigator.pushReplacementNamed(Get.context!, '${RouteHelper.orderSuccessful}/$orderID/success');
       }
     } else {
-      showCustomSnackBarHelper(message);
+      return;
     }
   }
 }

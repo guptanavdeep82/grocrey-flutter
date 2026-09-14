@@ -22,7 +22,7 @@ class ApiErrorHandler {
               switch (error.response!.statusCode) {
                 case 500:
                 case 503:
-                  errorDescription = error.response!.statusMessage;
+                  errorDescription = 'server_busy_try_again';
                   break;
                 default:
                   ErrorResponseModel? errorResponse;

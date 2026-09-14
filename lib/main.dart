@@ -93,10 +93,17 @@ Future<void> _bootstrap() async {
   }
 
   if (!kIsWeb) {
-    if (defaultTargetPlatform == TargetPlatform.android) {
-      FirebaseMessaging.instance.requestPermission();
-
-      /// firebase crashlytics
+    await FirebaseMessaging.instance.requestPermission(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+    if (defaultTargetPlatform == TargetPlatform.iOS) {
+      await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+        alert: true,
+        badge: true,
+        sound: true,
+      );
     }
   } else {
     // Check if Firebase is already initialized before initializing again

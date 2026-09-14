@@ -25,7 +25,11 @@ class NotificationHelper {
 
   static Future<void> initialize(FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
     var androidInitialize = const AndroidInitializationSettings('notification_icon');
-    var iOSInitialize = const DarwinInitializationSettings();
+    var iOSInitialize = const DarwinInitializationSettings(
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true,
+    );
     var initializationsSettings = InitializationSettings(android: androidInitialize, iOS: iOSInitialize);
 
     flutterLocalNotificationsPlugin.initialize(initializationsSettings,
@@ -86,7 +90,9 @@ class NotificationHelper {
       }
 
       if(message.data['type'] != 'maintenance') {
-        showNotification(message, flutterLocalNotificationsPlugin, kIsWeb);
+        if (kIsWeb || defaultTargetPlatform != TargetPlatform.iOS) {
+          showNotification(message, flutterLocalNotificationsPlugin, kIsWeb);
+        }
         // Refresh order list and order updates (e.g. Order Packed, Out for Delivery) on notification
         if (_isOrderRelatedNotification(message.data) && Get.context != null) {
           final orderIdStr = message.data['order_id']?.toString();
@@ -222,7 +228,15 @@ class NotificationHelper {
       styleInformation: bigTextStyleInformation, priority: Priority.max, playSound: true,
       sound: const RawResourceAndroidNotificationSound('notification'),
     );
-    NotificationDetails platformChannelSpecifics = NotificationDetails(android: androidPlatformChannelSpecifics);
+    const DarwinNotificationDetails iOSPlatformChannelSpecifics = DarwinNotificationDetails(
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
+    );
+    NotificationDetails platformChannelSpecifics = NotificationDetails(
+      android: androidPlatformChannelSpecifics,
+      iOS: iOSPlatformChannelSpecifics,
+    );
     await fln.show(0, data['title'], data['body'], platformChannelSpecifics, payload: jsonEncode(data));
   }
 
@@ -243,7 +257,15 @@ class NotificationHelper {
       styleInformation: bigPictureStyleInformation, importance: Importance.max,
       sound: const RawResourceAndroidNotificationSound('notification'),
     );
-    final NotificationDetails platformChannelSpecifics = NotificationDetails(android: androidPlatformChannelSpecifics);
+    const DarwinNotificationDetails iOSPlatformChannelSpecifics = DarwinNotificationDetails(
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
+    );
+    final NotificationDetails platformChannelSpecifics = NotificationDetails(
+      android: androidPlatformChannelSpecifics,
+      iOS: iOSPlatformChannelSpecifics,
+    );
     await fln.show(0, data['title'], data['body'], platformChannelSpecifics, payload: jsonEncode(data));
   }
 

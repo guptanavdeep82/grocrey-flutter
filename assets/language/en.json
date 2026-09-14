@@ -142,6 +142,7 @@
   "digital_payment": "Digital Payment",
   "confirm_order": "Confirm Order",
   "payment_cancelled": "Payment Cancelled",
+  "server_busy_try_again": "Server is busy. Please try again.",
   "track_order": "Track Order",
   "back_home": "Back to Home",
   "PAYMENT": "Payment",

@@ -92,6 +92,14 @@ class SplashProvider extends ChangeNotifier {
         _baseUrls = _configModel?.baseUrls;
 
         await _onConfigAction(fromNotification);
+      } else {
+        await Future.delayed(const Duration(seconds: 1));
+        apiResponseModel = await splashRepo!.getConfig(source: DataSourceEnum.client);
+        if (apiResponseModel.isSuccess) {
+          _configModel = ConfigModel.fromJson(apiResponseModel.response?.data);
+          _baseUrls = _configModel?.baseUrls;
+          await _onConfigAction(fromNotification);
+        }
       }
     }
 

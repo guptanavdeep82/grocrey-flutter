@@ -17,8 +17,31 @@ class ApiCheckerHelper {
       Provider.of<SplashProvider>(Get.context!, listen: false).removeSharedData();
       Navigator.pushAndRemoveUntil(Get.context!, MaterialPageRoute(builder: (_) => const LoginScreen()), (route) => false);
     }else {
-      showCustomSnackBarHelper(getTranslated(error.errors?.first.message, Get.context!));
+      final raw = error.errors?.first.message;
+      if (_friendlyMessage(raw) == 'server_busy_try_again') {
+        return;
+      }
+      showCustomSnackBarHelper(getTranslated(raw, Get.context!));
     }
+  }
+
+  static String _friendlyMessage(String? raw) {
+    final text = (raw ?? '').toLowerCase();
+    if (text.contains('internal server')
+        || text.contains('sqlstate')
+        || text.contains('operation not permitted')
+        || text.contains('server-busy')
+        || text.contains('server is busy')
+        || text.contains('server_busy_try_again')
+        || text.contains('connection refused')
+        || text.contains('oauth_access_tokens')
+        || text.contains('queryexception')
+        || text.contains('failed to load data - status code: 5')
+        || text.contains('<html')
+        || text.contains('whoops')) {
+      return 'server_busy_try_again';
+    }
+    return raw ?? 'Something went wrong';
   }
 
   static ErrorResponseModel getError(ApiResponseModel apiResponse){

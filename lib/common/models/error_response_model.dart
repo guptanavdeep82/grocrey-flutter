@@ -17,6 +17,8 @@ class ErrorResponseModel {
       json["errors"].forEach((v) {
         _errors!.add(Errors.fromJson(v));
       });
+    } else if (json is Map && json["message"] != null) {
+      _errors = [Errors(code: '', message: json["message"].toString())];
     }
   }
 
