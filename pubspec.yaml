@@ -2,7 +2,7 @@ name: flutter_grocery
 description: A new Flutter application.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.3+2026091401 # 1.0.3+2026091401  2026 09 14 build 01
+version: 1.0.4+2026091402 # 1.0.4+2026091402  App Store 1.0.3 is closed; new train required
 
 environment:
   sdk: ^3.8.1
